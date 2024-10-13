@@ -15,6 +15,11 @@ spring:
     show-sql: true
   profiles:
     active: dev
+openai.api.key: sk-vvszxdWNFFCx43epSAvdBnJxCGDaywooM0RP3OtRt-T3BlbkFJtmzx37bR9TFjG8q7DbLe0fvpR6vf_hILZRDAwdwCcA
+openai.api.keyShivam: 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
+golu.sec: AIzaSyDrYXj-ZWdtuNQN424ATOpC_mwTHxJn9nc
+golu.Url: https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent
+
 logging:
   level:
     root: INFO
