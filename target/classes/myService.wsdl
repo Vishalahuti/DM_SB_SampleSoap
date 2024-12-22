@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="http://example.com/myservice"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             name="MyService"
+             targetNamespace="http://example.com/myservice"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+    <!-- Schema Definitions -->
+    <types>
+        <xs:schema targetNamespace="http://example.com/myservice">
+            <xs:element name="UserRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="userId" type="xs:int"/>
+                        <xs:element name="userName" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="UserResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="status" type="xs:string"/>
+                        <xs:element name="message" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </types>
+
+    <!-- Messages -->
+    <message name="UserServiceRequest">
+        <part name="parameters" element="tns:UserRequest"/>
+    </message>
+    <message name="UserServiceResponse">
+        <part name="parameters" element="tns:UserResponse"/>
+    </message>
+
+    <!-- PortType (Operation) -->
+    <portType name="UserServicePortType">
+        <operation name="getUserInfo">
+            <input message="tns:UserServiceRequest"/>
+            <output message="tns:UserServiceResponse"/>
+        </operation>
+    </portType>
+
+    <!-- Binding -->
+    <binding name="UserServiceBinding" type="tns:UserServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="getUserInfo">
+            <soap:operation soapAction="http://example.com/myservice/getUserInfo"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <!-- Service -->
+    <service name="UserService">
+        <port name="UserServicePort" binding="tns:UserServiceBinding">
+            <soap:address location="http://localhost:8080/myservice"/>
+        </port>
+    </service>
+</definitions>
